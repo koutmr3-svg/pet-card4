@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Lattemaru | Ultra 3D Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. 全体設定 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            width: 100vw; height: 100dvh; display: flex;
+            justify-content: center; align-items: center; overflow: hidden;
+            background: linear-gradient(-45deg, #5d4037, #a1887f, #efebe9, #d7ccc8, #8d6e63);
+            background-size: 300% 300%; animation: gradientBG 12s ease infinite;
+            font-family: 'Arial Black', sans-serif; color: white; text-align: center;
+        }
+
+        .main-container {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; width: 100%; padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 2. ネオンタイトル --- */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 12vw, 5rem); margin-bottom: 3vh;
+            text-transform: capitalize;
+            text-shadow: 0 0 10px #fff, 0 0 20px #d4af37, 0 0 30px #aa8805;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+
+        /* --- 3. 3Dカードの箱 --- */
+        .card-container {
+            width: 250px; height: 380px;
+            perspective: 1200px; margin-bottom: 5vh;
+            cursor: pointer;
+            margin-left: auto; margin-right: auto;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .card {
+            width: 100%; height: 100%;
+            position: relative; transform-style: preserve-3d;
+            animation: spinCard 7s linear infinite;
+        }
+
+        .card.is-paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes spinCard {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* --- 4. カードの表裏（光を少し明るく調整） --- */
+        .face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow: hidden;
+        }
+
+        .face::after {
+            content: ""; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            /* ★ここを 0.3 から 0.5 に変更して光を少し強調しました */
+            background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 70%);
+            transform: rotate(25deg); animation: sweep 4s infinite;
+        }
+
+        @keyframes sweep {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+
+        .front { transform: rotateY(0deg); }
+        .back { transform: rotateY(180deg); }
+        .face img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 5. ボタン設定（浮き沈み維持） --- */
+        .btn-group { display: flex; gap: 15px; justify-content: center; width: 100%; }
+        .btn-common {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 140px; height: 50px; border-radius: 50px; color: white;
+            text-decoration: none; font-weight: bold; font-size: 0.9rem;
+            transition: 0.3s;
+            animation: pulse 2s infinite ease-in-out; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); white-space: nowrap;
+        }
+        .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .tiktok-btn { background: #000; border: 2px solid #ff0050; box-shadow: 2px 2px 0px #00f2ea; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 { font-size: 18vw !important; margin-bottom: 1vh; }
+            .card-container { width: 260px; height: 395px; margin-bottom: 3vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>Lattemaru</h1>
+
+        <div class="card-container" id="cardContainer">
+            <div class="card" id="mainCard">
+                <div class="face front">
+                    <img src="potato.png" alt="FRONT">
+                </div>
+                <div class="face back">
+                    <img src="info.png" alt="BACK">
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="https://www.instagram.com/lattemaru_0423" class="btn-common insta-btn">Instagram</a>
+            <a href="https://www.tiktok.com/@koutmr3" class="btn-common tiktok-btn">TikTok</a>
+        </div>
+    </div>
+
+    <script>
+        const card = document.getElementById('mainCard');
+        const container = document.getElementById('cardContainer');
+
+        function toggleAnimation(e) {
+            if (e.target.closest('.btn-group')) return;
+            card.classList.toggle('is-paused');
+        }
+
+        container.addEventListener('click', toggleAnimation);
+        container.addEventListener('touchend', function(e) {
+            e.preventDefault(); 
+            toggleAnimation(e);
+        }, { passive: false });
+    </script>
+
+</body>
+</html>
