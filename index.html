@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <title>Lattemaru | Ultra 3D Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- 1. 全体設定 --- */
+        /* 全体レイアウト */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            width: 100vw; height: 100dvh; display: flex;
-            justify-content: center; align-items: center; overflow: hidden;
-            background: linear-gradient(-45deg, #5d4037, #a1887f, #efebe9, #d7ccc8, #8d6e63);
-            background-size: 300% 300%; animation: gradientBG 12s ease infinite;
-            font-family: 'Arial Black', sans-serif; color: white; text-align: center;
-        }
-
-        .main-container {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; width: 100%; padding: 20px;
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #d35400, #e67e22, #f39c12, #edbb99, #873600);
+            background-size: 300% 300%;
+            /* ★スピードを1秒短くして 11s に変更 */
+            animation: gradientBG 11s ease infinite;
+            font-family: 'Arial Black', sans-serif;
+            color: white;
+            text-align: center;
         }
 
         @keyframes gradientBG {
@@ -28,30 +33,49 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- 2. ネオンタイトル --- */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* タイトル設定 */
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(3rem, 12vw, 5rem); margin-bottom: 3vh;
+            font-family: 'Mochiy Pop P One', sans-serif;
+            font-size: clamp(2.2rem, 9vw, 3.8rem);
+            margin-bottom: 3vh;
             text-transform: capitalize;
-            text-shadow: 0 0 10px #fff, 0 0 20px #d4af37, 0 0 30px #aa8805;
+            text-shadow: none;
+            letter-spacing: 0.1em;
             animation: flicker 2s infinite;
         }
 
-        @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
 
-        /* --- 3. 3Dカードの箱 --- */
+        /* 3Dカード設定 */
         .card-container {
-            width: 250px; height: 380px;
-            perspective: 1200px; margin-bottom: 5vh;
+            width: 250px;
+            height: 380px;
+            perspective: 1200px;
+            margin-bottom: 5vh;
             cursor: pointer;
-            margin-left: auto; margin-right: auto;
+            margin-left: auto;
+            margin-right: auto;
             position: relative;
             -webkit-tap-highlight-color: transparent;
         }
 
         .card {
-            width: 100%; height: 100%;
-            position: relative; transform-style: preserve-3d;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
             animation: spinCard 7s linear infinite;
         }
 
@@ -64,21 +88,31 @@
             100% { transform: rotateY(360deg); }
         }
 
-        /* --- 4. カードの表裏（光を少し明るく調整） --- */
+        /* カードの面と光の演出 */
         .face {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
 
         .face::after {
-            content: ""; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            /* ★ここを 0.3 から 0.5 に変更して光を少し強調しました */
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 70%);
-            transform: rotate(25deg); animation: sweep 4s infinite;
+            transform: rotate(25deg);
+            animation: sweep 4s infinite;
         }
 
         @keyframes sweep {
@@ -90,18 +124,39 @@
         .back { transform: rotateY(180deg); }
         .face img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- 5. ボタン設定（浮き沈み維持） --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; width: 100%; }
+        /* 下部ボタン設定 */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+        }
+
         .btn-common {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 140px; height: 50px; border-radius: 50px; color: white;
-            text-decoration: none; font-weight: bold; font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 50px;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
             transition: 0.3s;
             animation: pulse 2s infinite ease-in-out; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            white-space: nowrap;
         }
+
         .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .tiktok-btn { background: #000; border: 2px solid #ff0050; box-shadow: 2px 2px 0px #00f2ea; }
+        
+        /* ★TikTokボタンの周囲（ボーダーと影）を白に変更 */
+        .tiktok-btn { 
+            background: #000; 
+            border: 2px solid #ffffff; 
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+        }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -109,14 +164,15 @@
             100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         }
 
+        /* レスポンシブ（スマホ調整） */
         @media screen and (max-width: 480px) {
-            h1 { font-size: 18vw !important; margin-bottom: 1vh; }
+            h1 { font-size: 14vw !important; margin-bottom: 1vh; }
             .card-container { width: 260px; height: 395px; margin-bottom: 3vh; }
         }
     </style>
 </head>
-<body>
 
+<body>
     <div class="main-container">
         <h1>Lattemaru</h1>
 
@@ -152,6 +208,5 @@
             toggleAnimation(e);
         }, { passive: false });
     </script>
-
 </body>
 </html>
