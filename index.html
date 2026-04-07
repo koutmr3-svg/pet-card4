@@ -20,7 +20,6 @@
             overflow: hidden;
             background: linear-gradient(-45deg, #d35400, #e67e22, #f39c12, #edbb99, #873600);
             background-size: 300% 300%;
-            /* ★スピードを1秒短くして 11s に変更 */
             animation: gradientBG 11s ease infinite;
             font-family: 'Arial Black', sans-serif;
             color: white;
@@ -42,14 +41,16 @@
             padding: 20px;
         }
 
-        /* タイトル設定 */
+        /* タイトル設定（さらに小さく、間隔を狭く） */
         h1 {
             font-family: 'Mochiy Pop P One', sans-serif;
-            font-size: clamp(2.2rem, 9vw, 3.8rem);
+            /* ★PC・タブレットでのサイズをさらに縮小 */
+            font-size: clamp(1.8rem, 7vw, 3rem);
             margin-bottom: 3vh;
             text-transform: capitalize;
             text-shadow: none;
-            letter-spacing: 0.1em;
+            /* ★文字の間隔をギュッと詰めました */
+            letter-spacing: 0.02em;
             animation: flicker 2s infinite;
         }
 
@@ -151,7 +152,6 @@
 
         .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         
-        /* ★TikTokボタンの周囲（ボーダーと影）を白に変更 */
         .tiktok-btn { 
             background: #000; 
             border: 2px solid #ffffff; 
@@ -166,7 +166,8 @@
 
         /* レスポンシブ（スマホ調整） */
         @media screen and (max-width: 480px) {
-            h1 { font-size: 14vw !important; margin-bottom: 1vh; }
+            /* ★スマホでの表示サイズをさらに最適化 */
+            h1 { font-size: 11vw !important; margin-bottom: 2vh; }
             .card-container { width: 260px; height: 395px; margin-bottom: 3vh; }
         }
     </style>
