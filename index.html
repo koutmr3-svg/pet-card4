@@ -51,7 +51,7 @@
             text-shadow: none;
             /* ★文字の間隔をギュッと詰めました */
             letter-spacing: 0.02em;
-            animation: flicker 2s infinite;
+            animation: flicker 4s infinite;
         }
 
         @keyframes flicker {
@@ -77,7 +77,7 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            animation: spinCard 7s linear infinite;
+            animation: spinCard 7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
 
         .card.is-paused {
@@ -85,8 +85,9 @@
         }
 
         @keyframes spinCard {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+            0%   { transform: rotateY(0deg); }
+            50%  { transform: rotateY(180deg); } /* 点で指定する */
+            100% { transform: rotateY(360deg); }止まる（粘る） */
         }
 
         /* カードの面と光の演出 */
@@ -154,7 +155,7 @@
         
         .tiktok-btn { 
             background: #000; 
-            border: 2px solid #ffffff; 
+            border: 1.5px solid #ffffff; 
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
         }
 
